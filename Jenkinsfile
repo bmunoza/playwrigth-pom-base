@@ -59,5 +59,14 @@ pipeline {
     failure {
       echo '❌ QA CI failed'
     }
+    always {
+    publishHTML([
+      reportDir: 'playwright-report',
+      reportFiles: 'index.html',
+      reportName: 'Playwright Report',
+      keepAll: true,
+      alwaysLinkToLastBuild: true
+    ])
+  }
   }
 }
