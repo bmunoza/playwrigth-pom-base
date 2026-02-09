@@ -11,12 +11,12 @@ pipeline {
   }
 
   parameters {
-  choice(
-    name: 'TEST_SUITE',
-    choices: ['smoke', 'regression'],
-    description: 'Suite de pruebas a ejecutar'
-  )
-}
+    choice(
+      name: 'TEST_SUITE',
+      choices: ['smoke', 'regression'],
+      description: 'Suite de pruebas a ejecutar'
+    )
+  }
 
   stages {
 
@@ -41,11 +41,12 @@ pipeline {
     stage('Run Tests') {
       steps {
         script {
-            if (params.TEST_SUITE == 'smoke'){
-                sh 'npx playwright test --grep @smoke'
-            }else{
-                sh 'npx playwright test --grep @regression' 
-            }
+          if (params.TEST_SUITE == 'smoke') {
+            sh 'npx playwright test --grep @smoke'
+          } else {
+            sh 'npx playwright test --grep @regression'
+          }
+        }
       }
     }
   }
@@ -58,5 +59,4 @@ pipeline {
       echo '❌ QA CI failed'
     }
   }
-}
 }
