@@ -42,7 +42,7 @@ pipeline {
       echo '✅ QA CI passed'
     }
     failure {
-      echo '❌ QA CI failed'
+      echo '❌ QA CI failedfailed'
     }
   }
 }
