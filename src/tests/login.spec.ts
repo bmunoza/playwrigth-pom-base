@@ -12,7 +12,7 @@ const usuarios: UsuarioTest[] = [
 
 test.describe('Pruebas de login y flujo de compra en SauceDemo', () => {
     
-    test('Flujo completo: login, add to cart y checkout', async ({ page }) => {
+    test('@smoke Flujo completo: login, add to cart y checkout', async ({ page }) => {
 
         // 1️⃣ Login
         await page.goto('https://www.saucedemo.com/');
@@ -50,7 +50,7 @@ test.describe('Pruebas de login y flujo de compra en SauceDemo', () => {
         ).toBeVisible();
     });
 
-    test('Login con credenciales inválidas', async ({ page }) => {
+    test('@smoke Login con credenciales inválidas', async ({ page }) => {
         await page.goto('https://www.saucedemo.com/');
 
         await page.getByTestId('username').fill('invalid_user');

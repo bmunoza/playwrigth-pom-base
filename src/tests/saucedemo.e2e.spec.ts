@@ -4,7 +4,7 @@ import { InventoryPage } from '../pages/InventoryPage'
 import { CheckoutPage } from '../pages/CheckoutPage'
 
 
-test('Flujo completo Sauce Demo con POM', async ({ page }) =>{
+test('@regression Flujo completo Sauce Demo con POM', async ({ page }) =>{
 
     const loginPage = new LoginPage(page);
     const checkoutPage = new CheckoutPage(page);

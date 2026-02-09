@@ -12,7 +12,7 @@ const productos: Producto[] = [
 const usuario = usuarios[0];
 
   for (const prod of productos) {
-    test(`Compra ${prod} con ${usuario.user}`, async ({ page }) => {
+    test(`@regression Compra ${prod} con ${usuario.user}`, async ({ page }) => {
       const login = new LoginPage(page);
       const inventory = new InventoryPage(page);
       const checkout = new CheckoutPage(page);

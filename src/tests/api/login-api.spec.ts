@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('API demo-blaze login', async ({ request }) => {
+test('@smoke @regression API demo-blaze login', async ({ request }) => {
 
   // 1️⃣ Hacer la petición POST al endpoint de login
   const response = await request.post('https://api.demoblaze.com/login', {

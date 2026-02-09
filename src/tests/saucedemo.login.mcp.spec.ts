@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('SauceDemo Login - MCP Test', async ({ page }) => {
+test('@regression SauceDemo Login - MCP Test', async ({ page }) => {
   // Navigate to SauceDemo
   await page.goto('https://www.saucedemo.com/');
 
