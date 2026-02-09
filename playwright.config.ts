@@ -16,7 +16,7 @@ export default defineConfig({
   use: {
     // Base URL can be overridden with: BASE_URL=https://... npm test
     baseURL: process.env.BASE_URL || 'https://www.google.com',
-    headless: false,
+    headless: true,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
