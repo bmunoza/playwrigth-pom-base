@@ -11,7 +11,9 @@ export default defineConfig({
   retries: 1,
 
   // Reporter
-  reporter: [['html', { open: 'never' }], ['list']],
+  reporter: [
+  ['html', { outputFolder: 'playwright-report', open: 'never' }]
+],
 
   use: {
     // Base URL can be overridden with: BASE_URL=https://... npm test
