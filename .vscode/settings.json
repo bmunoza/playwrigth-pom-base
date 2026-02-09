@@ -1,0 +1,9 @@
+{
+  "modelContextProtocol": {
+    "servers": {
+      "playwright": {
+        "command": "playwright-mcp-server"
+      }
+    }
+  }
+}
