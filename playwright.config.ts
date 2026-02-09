@@ -15,6 +15,7 @@ export default defineConfig({
   ['html', { outputFolder: 'playwright-report', open: 'never' }]
 ],
 
+
   use: {
     // Base URL can be overridden with: BASE_URL=https://... npm test
     baseURL: process.env.BASE_URL || 'https://www.google.com',
@@ -29,6 +30,10 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
     },
   ],
 });
