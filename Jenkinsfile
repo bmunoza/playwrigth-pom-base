@@ -11,12 +11,12 @@ pipeline {
   }
 
   parameters {
-    choice(
-      name: 'TEST_SUITE',
-      choices: ['smoke', 'regression'],
-      description: 'Suite de pruebas a ejecutar'
-    )
-  }
+  string(
+    name: 'TEST_SUITE',
+    defaultValue: 'smoke',
+    description: 'Suite to execute'
+  )
+}
 
   stages {
 
@@ -41,14 +41,15 @@ pipeline {
     stage('Run Tests') {
       steps {
         script {
-          if (params.TEST_SUITE == 'smoke') {
-            sh 'npx playwright test --grep @smoke'
-          } else {
-            sh 'npx playwright test --grep @regression'
-          }
-        }
+         if (params.TEST_SUITE == 'regression') {
+             sh 'npx playwright test --grep @regression'
+        } else {
+             sh 'npx playwright test --grep @smoke'
       }
     }
+  }
+}
+
   }
 
   post {
