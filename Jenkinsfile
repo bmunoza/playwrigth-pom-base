@@ -1,57 +1,61 @@
+/* groovylint-disable NestedBlockDepth */
 pipeline {
-  agent {
-    docker {
-      image 'mcr.microsoft.com/playwright:v1.58.0-jammy'
-      args '-u root:root'
+    agent {
+        docker {
+            image 'mcr.microsoft.com/playwright:v1.58.0-jammy'
+            args '-u root:root'
+        }
     }
-  }
 
-  triggers {
-    cron('TZ=America/Bogota\n5 15 * * 1-5')
-  }  
+    triggers {
+        cron('TZ=America/Bogota\n5 15 * * 1-5')
+    }
 
-  environment {
-    CI = 'true'
-  }
+    environment {
+        CI = 'true'
+    }
 
-  parameters {
-    string(
+    parameters {
+        string(
       name: 'TEST_SUITE',
       defaultValue: 'smoke',
-      description: 'Suite to execute'
-    )
-  }
-
-  stages {
-
-    stage('Install dependencies') {
-      steps {
-        sh 'npm ci'
-      }
+      description: 'Suite to execute')
     }
 
-    stage('Compile') {
-      steps {
-        sh 'npm run compile'
-      }
-    }
-
-    stage('Run Tests') {
-      steps {
-        script {
-          if (params.TEST_SUITE == 'regression') {
-            sh 'npx playwright test --grep @regression'
-          } else {
-            sh 'npx playwright test --grep @smoke'
-          }
+    stages {
+        stage('Install dependencies') {
+            steps {
+                sh 'npm ci'
+            }
         }
-      }
-    }
-  }
 
-  post {
-    always {
-      publishHTML([
+        stage('Compile') {
+            steps {
+                sh 'npm run compile'
+            }
+        }
+
+        stage('Cross Browser') {
+            parallel {
+                stage('Chromium') {
+                    steps {
+                        sh 'npx playwright test --project=chromium'
+                    }
+                }
+
+                stage('Firefox') {
+                    /* groovylint-disable-next-line NestedBlockDepth */
+                    steps {
+                        sh 'npx playwright test --project=firefox'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            publishHTML([
         reportDir: 'playwright-report',
         reportFiles: 'index.html',
         reportName: 'Playwright Report',
@@ -59,6 +63,6 @@ pipeline {
         alwaysLinkToLastBuild: true,
         allowMissing: false
       ])
+        }
     }
-  }
 }
