@@ -6,6 +6,10 @@ pipeline {
     }
   }
 
+  triggers {
+    cron('TZ=America/Bogota\n5 15 * * 1-5')
+  }  
+
   environment {
     CI = 'true'
   }
